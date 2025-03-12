@@ -10,6 +10,8 @@
 const PLAYERSPEED = 5;
 const PLAYERJUMPHEIGHT = 8;
 
+var score = 0;
+
 /*******************************************************/
 // setup()
 /*******************************************************/
@@ -21,6 +23,8 @@ function setup() {
     player.friction = 0;
     
     walls();
+    platforms();
+    coins();
 }
 
 /*******************************************************/
@@ -37,6 +41,23 @@ function walls() {
 	   wallTop.color = 'blue';
 	wallBottom = new Sprite(windowWidth/2, 910, width, 8, 'k' );
 	   wallBottom.color = 'blue';
+}
+
+function coins() {
+    coin1 = new Sprite(500, 500, 20, 'd');
+}
+
+/*******************************************************/
+// platforms()
+//called by setup()
+/*******************************************************/
+function platforms() {
+    platform1 = new Sprite(300, 750, 500, 50, 'k');
+    platform2 = new Sprite(100, 600, 250, 50, 'k');
+    platform3 = new Sprite(680, 400, 250, 50, 'k');
+    platform4 = new Sprite(1200, 400, 100, 50, 'k');
+    platform5 = new Sprite(1500, 400, 50, 50, 'k');
+    platform6 = new Sprite(1700, 400, 10, 10, 'k');
 }
 
 
@@ -56,7 +77,9 @@ function draw() {
     }
     if (kb.presses('w')) {
         player.vel.y = -PLAYERJUMPHEIGHT;
-    } 
+    } else {
+
+    }
 }
 
 /*******************************************************/
