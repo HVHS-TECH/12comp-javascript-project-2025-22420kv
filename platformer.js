@@ -25,7 +25,15 @@ function setup() {
     walls();
     platforms();
     coins();
+
+    player.collides(coin, getPoint);
+	function getPoint(collider1, collider2) {
+		collider2.remove();
+		score++;
+	}
 }
+
+
 
 /*******************************************************/
 // walls()
@@ -44,7 +52,7 @@ function walls() {
 }
 
 function coins() {
-    coin1 = new Sprite(500, 500, 20, 'd');
+    coin = new Sprite(500, 500, 20, 'd');
 }
 
 /*******************************************************/
@@ -60,14 +68,22 @@ function platforms() {
     platform6 = new Sprite(1700, 400, 10, 10, 'k');
 }
 
-
 /*******************************************************/
 // draw()
 /*******************************************************/
 function draw() {
     background("Lightblue");
 
-    ///Keyboard movement keys///
+    kbMovement();
+    displayScore();
+}
+
+
+/*******************************************************/
+// kbMovement()
+//Called by draw()
+/*******************************************************/
+function kbMovement() {
     if (kb.pressing('a')) {
 		player.vel.x = -PLAYERSPEED;
     } else if (kb.pressing('d')) {
@@ -75,11 +91,24 @@ function draw() {
     } else {
         player.vel.x = 0;
     }
-    if (kb.presses('w')) {
+    if (kb.presses('w')) {  //make sprite know if it touching other sprite
         player.vel.y = -PLAYERJUMPHEIGHT;
-    } else {
-
     }
+}
+
+
+//function isPlayerJumping() {
+//    console.log("Player left");
+//    player.collides(wallBottom, stopJumping);
+//    function stopJumping(collider1, collider2) {
+//		player.vel.y = 0;
+//	}
+//}
+
+
+function displayScore() {
+    text("Score: "+ score, 10, 25) 
+    textSize(20);
 }
 
 /*******************************************************/
