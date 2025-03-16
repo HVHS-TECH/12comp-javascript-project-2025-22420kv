@@ -12,6 +12,10 @@ const PLAYERJUMPHEIGHT = 8;
 
 var score = 0;
 
+function preload() {
+    imgPlatform  = loadImage('../images/betterPlatforms.png');
+  }
+
 /*******************************************************/
 // setup()
 /*******************************************************/
@@ -52,7 +56,8 @@ function walls() {
 }
 
 function coins() {
-    coin = new Sprite(500, 500, 20, 'd');
+    coin = new Sprite(500, 500, 20, 'k');
+
 }
 
 /*******************************************************/
@@ -63,16 +68,14 @@ function platforms() {
     platform1 = new Sprite(300, 750, 500, 50, 'k');
     platform2 = new Sprite(100, 600, 250, 50, 'k');
     platform3 = new Sprite(680, 400, 250, 50, 'k');
-    platform4 = new Sprite(1200, 400, 100, 50, 'k');
-    platform5 = new Sprite(1500, 400, 50, 50, 'k');
-    platform6 = new Sprite(1700, 400, 10, 10, 'k');
+    platform4 = new Sprite(1200, 400, 100, 50, 'k');   //Continue making sprites collide with images//
 }
 
 /*******************************************************/
 // draw()
 /*******************************************************/
 function draw() {
-    background("Lightblue");
+    background("Lightblue"); 
 
     kbMovement();
     displayScore();
