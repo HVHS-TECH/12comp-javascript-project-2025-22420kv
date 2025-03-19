@@ -10,8 +10,8 @@
 let sheetImg;
 let grass, water, dirt;
 
-//const PLAYERSPEED = 5;
-//const PLAYERJUMPHEIGHT = 8;
+const PLAYERSPEED = 1;
+const PLAYERJUMPHEIGHT = 1.5;
 
 //var score = 0;
 
@@ -24,11 +24,12 @@ function preload() {
 // setup()
 /*******************************************************/
 function setup() {
-    new Canvas(200, 100, "pixelated x4"); 
-    //world.gravity.y = 10;
-    //player = new Sprite(windowWidth/2, windowHeight/2, 100, 'd');
-    //player.color = 'yellow';
-    //player.friction = 0;
+    new Canvas(400, 200, "pixelated x4"); 
+    world.gravity.y = 10;
+    player = new Sprite(60, 10, 7, 'd'); 
+    player.color = 'lightpink';
+    player.friction = 0;;
+    player.drag = 0;
 
     grass = new Group();
     grass.image = (sheetImg);
@@ -39,12 +40,28 @@ function setup() {
 
     new Tiles(
         [
-            'gggggggg'
+            'ggggggg',
+            '         ggggggg',
+            '    gggggg',
+            'ggg',
+            '  gggggg',
+            '        gggggg',
+            '               gggg',
+            '          gggggg',
+            '     ggggg',
+            ' ggg',
+            '   ggg',
+            '      g',
+            '         g',
+            '           g',
+            '               g',
+            '                  g'
         ],
-        10, 10, //x, y
+        50, 20, //x, y
         8, 8   //w, h
     )
 
+    playerDeath();
     //walls();
     //platforms();
     //coins();
@@ -54,6 +71,12 @@ function setup() {
 	//	collider2.remove();
 	//	score++;
 	///}
+}
+
+function playerDeath() {
+    killBlock = new Sprite(200, 200, 400, 10, 'k');
+    killBlock.color = 'red';
+    
 }
 
 /******************************************************/
@@ -91,28 +114,32 @@ function setup() {
 // draw()
 /*******************************************************/
 function draw() {
-    background("black"); 
-    //kbMovement();
+    background("#21263f");      //#21263f background color to match tiles
+    kbMovement();
     //displayScore();
+    if (player.collide(killBlock)) {
+        player.pos.y = '10';
+        player.pos.x = '60';
+    }
 }
 
 
 /*******************************************************/
-// kbMovement()
-//Called by draw()
+// kbMovement()                                            //Note: Make sprite unable to double jump when its in the air///
+//Called by draw()  
 /*******************************************************/
-//function kbMovement() {
-//    if (kb.pressing('a')) {
-//		player.vel.x = -PLAYERSPEED;
-//    } else if (kb.pressing('d')) {
-//        player.vel.x = PLAYERSPEED;
-//    } else {
-//        player.vel.x = 0;
-//    }
-//    if (kb.presses('w')) {  //make sprite know if it touching other sprite
-//        player.vel.y = -PLAYERJUMPHEIGHT;
-//    }
-//}
+function kbMovement() {
+    if (kb.pressing('a')) {
+		player.vel.x = -PLAYERSPEED;
+    } else if (kb.pressing('d')) {
+        player.vel.x = PLAYERSPEED;
+    } else {
+        player.vel.x = 0;
+    }
+    if (kb.presses('w')) {  
+        player.vel.y = -PLAYERJUMPHEIGHT;
+    }
+}
 
 
 //function isPlayerJumping() {
