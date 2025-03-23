@@ -56,12 +56,12 @@ function setup() {
             '          gggggg',
             '     ggggg',
             ' ggg',
-            '   ggg',
-            '      g',
-            '         g',
-            '             c',
-            '           g',
-            '               g',
+            '   ggg                                 gggggg',
+            '      g                          gggg',
+            '         g                     g',
+            '             c            gggg',
+            '           g          ggg',
+            '               g    g',
             '                  g'
         ],
         50, 20, //x, y
@@ -69,25 +69,29 @@ function setup() {
     )
 
     playerDeath();
+    exitBlock();
 
-    //point = new Sprite(100, 10, 7, 'k')           //func removeTile(position):
-                                                    //    $Tilemap.set_cell(position.x,positon.y,-1)
 
-    //funcrion removeCoin(position) {
-    //    coin.remove(position.x, position.y, -1)
-    //}
-
-    player.collides(coin, getPoint);        
-	function getPoint(collider1, collider2) {
+/*******************************************************/
+// Help from p5.play tiles page 
+/*******************************************************/
+    player.collides(coin, (player, coin) => {
 		coin.remove();
-		score++;
-	}
+        score++;
+	});
 }
+
+
 
 function playerDeath() {
     killBlock = new Sprite(200, 200, 400, 10, 'k');
     killBlock.color = 'red';
     
+}
+
+function exitBlock() {
+    exitDoor = new Sprite(400, 96, 5, 15, 'k');
+    exitDoor.color = "white";  
 }
 
 /*******************************************************/
@@ -98,6 +102,11 @@ function draw() {
     kbMovement();
     displayScore();
     if (player.collide(killBlock)) {
+        player.pos.y = '10';
+        player.pos.x = '60';
+    }
+
+    if(player.collide(exitDoor)) {
         player.pos.y = '10';
         player.pos.x = '60';
     }
@@ -133,9 +142,14 @@ function kbMovement() {
 
 
 function displayScore() {
-    text("Score: "+ score, 350, 10) 
+    text("Score: "+ score, 350, 10)     ///figure out how to change the text color
     textSize(10);
 }
+
+//function displayScore() {
+//    document.getElementById("myH2").style.color = "black";
+//}
+
 
 /*******************************************************/
 // Copied from Stack Overflow website to hide scroll bars 
