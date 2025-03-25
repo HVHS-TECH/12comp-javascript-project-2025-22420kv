@@ -26,7 +26,7 @@ function preload() {
 function setup() {
     new Canvas(400, 200, "pixelated x4"); 
     world.gravity.y = 10;
-    player = new Sprite(60, 10, 7, 'd'); 
+    player = new Sprite(10, 10, 7, 'd'); 
     player.color = 'lightpink';
     player.friction = 0;;
     player.drag = 0;
@@ -38,6 +38,14 @@ function setup() {
     grass.addAni({ w:8, h:8, row:1, col:1 });
     grass.tile = 'g';
 
+    stone = new Group();
+    stone.image = (sheetImg);
+    stone.collider = "static";
+    stone.spriteSheet = sheetImg;
+    stone.addAni({ w:8, h:8, row:0, col:3 });
+    stone.tile = 's';
+
+
     coin = new Group();
     coin.image = (coinImg);
     coin.collider = "static";
@@ -45,26 +53,31 @@ function setup() {
 
     new Tiles(
         [
-            'ggggggg',
+            's',
+            's              s',
+            'ggggggg        s',
             '         ggggggg',
             '    gggggg',
             'ggg',
-            '  gggggg',
-            '        gggggg',
-            '                  c',
-            '               gggg',
+            '  gggggg           s',
+            '        gggggg     s',
+            '                  cs',
+            '               ggggg',
             '          gggggg',
             '     ggggg',
-            ' ggg',
-            '   ggg                                 gggggg',
+            ' ggg                                    gggg',
+            '   ggg                                g',
             '      g                          gggg',
             '         g                     g',
             '             c            gggg',
             '           g          ggg',
-            '               g    g',
-            '                  g'
+            '         g     g    g',
+            '       g           g',
+            'c   g',
+            'gg',
+            '                                              g  g'
         ],
-        50, 20, //x, y
+        5, 5, //x, y
         8, 8   //w, h
     )
 
@@ -90,7 +103,7 @@ function playerDeath() {
 }
 
 function exitBlock() {
-    exitDoor = new Sprite(400, 96, 5, 15, 'k');
+    exitDoor = new Sprite(400, 169, 5, 15, 'k');
     exitDoor.color = "white";  
 }
 
@@ -108,7 +121,7 @@ function draw() {
 
     if(player.collide(exitDoor)) {
         player.pos.y = '10';
-        player.pos.x = '60';
+        player.pos.x = '10';
     }
 }
 
