@@ -15,10 +15,13 @@ const PLAYERJUMPHEIGHT = 1.5;
 
 var score = 0;
 
+gameState = "play";
+
 function preload() {
     sheetImg = loadImage("../assets/cavesofgallet_tiles.png");
     coinImg = loadImage("../assets/smallCoin.png");
 }
+
 
 /*******************************************************/
 // setup()
@@ -111,20 +114,32 @@ function exitBlock() {
 // draw()
 /*******************************************************/
 function draw() {
+    if (gameState == "play") {
+		runGame();
+	} else if (gameState == "lose") {
+		loseScreen();
+	}
+
+    
+}
+
+function runGame() {
     background("#21263f");      //#21263f background color to match tiles
     kbMovement();
     displayScore();
+    playerCollisions();
+}
+
+function playerCollisions() {
     if (player.collide(killBlock)) {
         player.pos.y = '10';
-        player.pos.x = '60';
+        player.pos.x = '10';
     }
-
     if(player.collide(exitDoor)) {
         player.pos.y = '10';
         player.pos.x = '10';
     }
 }
-
 
 /*******************************************************/
 // kbMovement()                                            //Note: Make sprite unable to double jump when its in the air///
