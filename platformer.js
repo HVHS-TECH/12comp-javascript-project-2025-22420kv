@@ -22,6 +22,18 @@ function preload() {
     coinImg = loadImage("../assets/smallCoin.png");
 }
 
+function start() {
+    message();
+}
+
+function message() {
+    alert("Congratulations!\nYou got the script running.")
+}
+
+function stopPokingMe() {
+    start();
+    //console.log(button pressed);
+}
 
 /*******************************************************/
 // setup()
@@ -119,8 +131,6 @@ function draw() {
 	} else if (gameState == "lose") {
 		loseScreen();
 	}
-
-    
 }
 
 function runGame() {
@@ -154,8 +164,11 @@ function kbMovement() {
         player.vel.x = 0;
     }
     if (kb.presses('w')) {  
+        //if (player.collides(grass)) {
+        //    player.vel.y = 0;
+        //}
         player.vel.y = -PLAYERJUMPHEIGHT;
-    }
+    } 
 
 }
 
