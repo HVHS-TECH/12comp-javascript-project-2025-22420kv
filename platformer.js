@@ -17,10 +17,16 @@ var score = 0;
 
 gameState = "play";
 
+
+
 function preload() {
     sheetImg = loadImage("assets/cavesofgallet_tiles.png");
     coinImg = loadImage("assets/smallCoin.png");
 }
+
+
+
+
 //function stopPokingMe() {
 //    start();
 //}
@@ -32,6 +38,7 @@ function preload() {
 //function message() {
 //    alert("Congratulations!\nYou got the script running.")
 //}
+
 
 
 /*******************************************************/
@@ -109,7 +116,6 @@ function setup() {
 }
 
 
-
 function playerDeath() {
     killBlock = new Sprite(200, 200, 400, 10, 'k');
     killBlock.color = 'red';
@@ -130,6 +136,15 @@ function draw() {
 	} else if (gameState == "lose") {
 		loseScreen();
 	}
+}
+
+function loseScreen() {
+    background('blue');
+    text("You died!", 10, 100);
+    textSize(100);
+    player.remove();
+    coin.remove();
+
 }
 
 function runGame() {
