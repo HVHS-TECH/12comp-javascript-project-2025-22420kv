@@ -21,19 +21,18 @@ function preload() {
     sheetImg = loadImage("../assets/cavesofgallet_tiles.png");
     coinImg = loadImage("../assets/smallCoin.png");
 }
+//function stopPokingMe() {
+//    start();
+//}
 
-function start() {
-    message();
-}
+//function start() {
+//    message();
+//}
 
-function message() {
-    alert("Congratulations!\nYou got the script running.")
-}
+//function message() {
+//    alert("Congratulations!\nYou got the script running.")
+//}
 
-function stopPokingMe() {
-    start();
-    //console.log(button pressed);
-}
 
 /*******************************************************/
 // setup()
