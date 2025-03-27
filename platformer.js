@@ -18,8 +18,8 @@ var score = 0;
 gameState = "play";
 
 function preload() {
-    sheetImg = loadImage("../assets/cavesofgallet_tiles.png");
-    coinImg = loadImage("../assets/smallCoin.png");
+    sheetImg = loadImage("assets/cavesofgallet_tiles.png");
+    coinImg = loadImage("assets/smallCoin.png");
 }
 //function stopPokingMe() {
 //    start();
