@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    margin: 50px;
+}
+
+button {
+    color: white;
+    background-color: #ec4464;
+    font-size: 60px;
+    padding: 8px 15px;
+    border-radius: 15px;
+    border: 6px solid #FBC490;
+    font-family: "Poetsen One", sans-serif
+}

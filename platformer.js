@@ -27,19 +27,6 @@ function preload() {
 
 
 
-//function stopPokingMe() {
-//    start();
-//}
-
-//function start() {
-//    message();
-//}
-
-//function message() {
-//    alert("Congratulations!\nYou got the script running.")
-//}
-
-
 
 /*******************************************************/
 // setup()
@@ -137,6 +124,7 @@ function draw() {
 		loseScreen();
 	}
 }
+
 
 function loseScreen() {
     background('blue');
