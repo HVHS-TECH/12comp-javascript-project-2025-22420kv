@@ -100,18 +100,25 @@ function setup() {
 		coin.remove();
         score++;
 	});
+
 }
 
-
-function playerDeath() {
-    killBlock = new Sprite(200, 200, 400, 10, 'k');
-    killBlock.color = 'red';
-    
-}
 
 function exitBlock() {
     exitDoor = new Sprite(400, 169, 5, 15, 'k');
     exitDoor.color = "white";  
+    if (player.collides(exitDoor)) {
+        player.remove();
+        endScreen();
+    }
+}
+
+function playerDeath() {
+    killBlock = new Sprite(200, 200, 400, 10, 'k');
+    killBlock.color = 'red';
+    if (player.collides(killBlock)) {
+        gameState = "lose"
+    }
 }
 
 /*******************************************************/
@@ -125,15 +132,14 @@ function draw() {
 	}
 }
 
-
-function loseScreen() {
-    background('blue');
-    text("You died!", 10, 100);
-    textSize(100);
-    player.remove();
-    coin.remove();
+function endScreen() {
+    background('pink');
+    
 
 }
+
+
+
 
 function runGame() {
     background("#21263f");      //#21263f background color to match tiles
@@ -141,6 +147,8 @@ function runGame() {
     displayScore();
     playerCollisions();
 }
+
+
 
 function playerCollisions() {
     if (player.collide(killBlock)) {
