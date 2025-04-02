@@ -4,6 +4,14 @@
 /*******************************************************/
 
 /*******************************************************/
+// IMPORTANT NOTES!!
+// Create for-loop for when you die the game shows how many coins you've collected
+// Create different types of coins so loop can show different items
+//
+// Make it so endScreen shows 
+/*******************************************************/
+
+/*******************************************************/
 // Variables
 /*******************************************************/
 
@@ -16,6 +24,7 @@ const PLAYERJUMPHEIGHT = 1.5;
 var score = 0;
 
 gameState = "play";
+levelWin = "Yes";
 
 
 
@@ -23,9 +32,6 @@ function preload() {
     sheetImg = loadImage("assets/cavesofgallet_tiles.png");
     coinImg = loadImage("assets/smallCoin.png");
 }
-
-
-
 
 
 /*******************************************************/
@@ -89,8 +95,7 @@ function setup() {
         8, 8   //w, h
     )
 
-    playerDeath();
-    exitBlock();
+    
 
 
 /*******************************************************/
@@ -101,24 +106,9 @@ function setup() {
         score++;
 	});
 
-}
+    playerDeath();
+    exitBlock();
 
-
-function exitBlock() {
-    exitDoor = new Sprite(400, 169, 5, 15, 'k');
-    exitDoor.color = "white";  
-    if (player.collides(exitDoor)) {
-        player.remove();
-        endScreen();
-    }
-}
-
-function playerDeath() {
-    killBlock = new Sprite(200, 200, 400, 10, 'k');
-    killBlock.color = 'red';
-    if (player.collides(killBlock)) {
-        gameState = "lose"
-    }
 }
 
 /*******************************************************/
@@ -127,37 +117,70 @@ function playerDeath() {
 function draw() {
     if (gameState == "play") {
 		runGame();
-	} else if (gameState == "lose") {
+	} 
+    else if (gameState == "lose") {
 		loseScreen();
 	}
 }
-
-function endScreen() {
-    background('pink');
-    
-
-}
-
-
-
-
 function runGame() {
-    background("#21263f");      //#21263f background color to match tiles
+    background("#21263f");    //#21263f background color to match tiles
     kbMovement();
     displayScore();
     playerCollisions();
+
+}
+
+/*******************************************************/
+// playerCollisions()                                          
+// Called by runGame()
+// When the user does something major
+/*******************************************************/
+function playerCollisions() {
+    if (player.collide(killBlock)) {
+        gameState = "lose";
+    }
+    if(player.collide(exitDoor)) {
+        endScreen();
+    }
+}
+
+/*******************************************************/
+// loseScreen()                                          
+// Called by draw()
+// When user user touches killBlock
+/*******************************************************/
+function loseScreen() {
+    background("red");
+    text("You died!", 100, 100);
+    player.remove();
+    tiles.remove();
+}
+
+function exitBlock() {
+    exitDoor = new Sprite(400, 169, 5, 15, 'k');
+    exitDoor.color = "white";  
+    if (player.collide(exitDoor)) {
+        endScreen();
+    }
+}
+
+/*******************************************************/
+// endScreen()                                          
+// Called by playerCollisions()
+// When user user touches exitDoor
+/*******************************************************/
+function endScreen() {
+    background("purple");
+    text("You escaped!", 100, 100);
 }
 
 
 
-function playerCollisions() {
-    if (player.collide(killBlock)) {
-        player.pos.y = '10';
-        player.pos.x = '10';
-    }
-    if(player.collide(exitDoor)) {
-        player.pos.y = '10';
-        player.pos.x = '10';
+function playerDeath() {
+    killBlock = new Sprite(200, 200, 400, 10, 'k');
+    killBlock.color = 'red';
+    if (player.collides(killBlock)) {
+        gameState = "lose"
     }
 }
 
