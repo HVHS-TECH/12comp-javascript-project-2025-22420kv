@@ -26,11 +26,30 @@ var score = 0;
 
 gameState = "play";
 
-function preload() {
-    sheetImg = loadImage("assets/cavesofgallet_tiles.png");
-    coinImg = loadImage("assets/smallCoin.png");
+let invalidUserName = "true";
+askUserName();
+
+function askUserName() {
+    while (invalidUserName) {
+        askUserName = prompt("Welcome User! Please state your username before starting.")
+        if(askUserName == null) {
+            return(askUserName);
+        }
+        if(askUserName == null || !isNaN(askUserName) || askUserName == "") {
+            alert("Invalid input: No numbers allowed!");
+        } else {
+            invalidUserName = false;
+        }
+        console.log(askUserName);
+    }
 }
 
+
+
+//function preload() {
+//    sheetImg = loadImage("assets/cavesofgallet_tiles.png");
+//    coinImg = loadImage("assets/smallCoin.png");
+//}
 
 //const openBtn = document.getElementById("openModal");
 //const closeBtn = document.getElementById("closeModal");
@@ -43,6 +62,8 @@ function preload() {
 //closeBtn.addEventListener("click", () => {
 //    modal.classList.remove("open");
 //})
+
+
 
 //const spriteColors = ["lightblue", "lightgreen", "lightgrey"];
 
@@ -95,10 +116,10 @@ function setup() {
             'ggg',
             '  gggggg           s',
             '        gggggg     s',
-            '                  cs',
-            '               ggggg',
-            '          gggggg',
-            '     ggggg',
+            '                  cs        g',       
+            '               ggggg           g',
+            '          gggggg                  g',
+            '     ggggg                           g',
             ' ggg                                    gggg',
             '   ggg                                g',
             '      g                          gggg',
@@ -234,6 +255,7 @@ function kbMovement() {
     } 
 
 }
+
 
 
 //function isPlayerJumping() {
