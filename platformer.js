@@ -6,8 +6,9 @@
 /*******************************************************/
 // IMPORTANT NOTES!!
 // Create for-loop for when you die the game shows how many coins you've collected
-// Create different types of coins so loop can show different items
-//
+// Create different types of coins so loop can show different items//
+// Create popup
+// Color picking for loop with array
 // Make it so endScreen shows 
 /*******************************************************/
 
@@ -25,11 +26,31 @@ var score = 0;
 
 gameState = "play";
 
-
 function preload() {
     sheetImg = loadImage("assets/cavesofgallet_tiles.png");
     coinImg = loadImage("assets/smallCoin.png");
 }
+
+
+//const openBtn = document.getElementById("openModal");
+//const closeBtn = document.getElementById("closeModal");
+//const modal = document.getElementById("modal");
+
+//openBtn.addEventListener("click", () => {
+//    modal.classList.add("open");
+//});
+
+//closeBtn.addEventListener("click", () => {
+//    modal.classList.remove("open");
+//})
+
+//const spriteColors = ["lightblue", "lightgreen", "lightgrey"];
+
+//console.log(spriteColors);
+//const list = [1, 2, 3, 4];
+//for (var i = 0; i <= 2; i++) {
+//    console.log[i];
+//}
 
 /*******************************************************/
 // setup()
@@ -41,6 +62,8 @@ function setup() {
     player.color = 'lightpink';
     player.friction = 0;;
     player.drag = 0;
+
+    colors = new Sprite(200, 10, 7, 7, 's');
 
     grass = new Group();
     grass.image = (sheetImg);
@@ -99,14 +122,17 @@ function setup() {
 // Help from p5.play tiles page 
 /*******************************************************/
     player.collides(coin, (player, coin) => {
+        console.log("Touches");
 		coin.remove();
         score++;
 	});
 
+
     playerDeath();
     exitBlock();
-
+    loop();
 }
+
 
 /*******************************************************/
 // draw()
@@ -118,7 +144,9 @@ function draw() {
     else if (gameState == "lose") {
 		loseScreen();
 	}
+    
 }
+
 function runGame() {
     background("#21263f");    //#21263f background color to match tiles
     kbMovement();
@@ -126,6 +154,7 @@ function runGame() {
     playerCollisions();
 
 }
+
 
 /*******************************************************/
 // playerCollisions()                                          
@@ -141,6 +170,8 @@ function playerCollisions() {
     }
 }
 
+
+
 /*******************************************************/
 // loseScreen()                                          
 // Called by draw()
@@ -153,6 +184,7 @@ function loseScreen() {
     player.remove();
     tiles.remove();
 }
+
 
 function playerDeath() {
     killBlock = new Sprite(200, 200, 400, 10, 'k');
@@ -217,6 +249,7 @@ function displayScore() {
     text("Score: "+ score, 350, 10)     ///figure out how to change the text color
     textSize(10);
 }
+
 
 //function displayScore() {
 //    document.getElementById("myH2").style.color = "black";
