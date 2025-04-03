@@ -24,15 +24,12 @@ const PLAYERJUMPHEIGHT = 1.5;
 var score = 0;
 
 gameState = "play";
-levelWin = "Yes";
-
 
 
 function preload() {
     sheetImg = loadImage("assets/cavesofgallet_tiles.png");
     coinImg = loadImage("assets/smallCoin.png");
 }
-
 
 /*******************************************************/
 // setup()
@@ -150,17 +147,19 @@ function playerCollisions() {
 // When user user touches killBlock
 /*******************************************************/
 function loseScreen() {
+    console.log("Player died");
     background("red");
     text("You died!", 100, 100);
     player.remove();
     tiles.remove();
 }
 
-function exitBlock() {
-    exitDoor = new Sprite(400, 169, 5, 15, 'k');
-    exitDoor.color = "white";  
-    if (player.collide(exitDoor)) {
-        endScreen();
+function playerDeath() {
+    killBlock = new Sprite(200, 200, 400, 10, 'k');
+    killBlock.color = 'red';
+    if (player.collides(killBlock)) {
+        gameState = "lose"
+        
     }
 }
 
@@ -170,17 +169,16 @@ function exitBlock() {
 // When user user touches exitDoor
 /*******************************************************/
 function endScreen() {
+    console.log("Player won");
     background("purple");
     text("You escaped!", 100, 100);
 }
 
-
-
-function playerDeath() {
-    killBlock = new Sprite(200, 200, 400, 10, 'k');
-    killBlock.color = 'red';
-    if (player.collides(killBlock)) {
-        gameState = "lose"
+function exitBlock() {
+    exitDoor = new Sprite(400, 169, 5, 15, 'k');
+    exitDoor.color = "white";  
+    if (player.collides(exitDoor)) {
+        endScreen();
     }
 }
 
