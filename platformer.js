@@ -46,10 +46,10 @@ function askUserName() {
 
 
 
-//function preload() {
-//    sheetImg = loadImage("assets/cavesofgallet_tiles.png");
-//    coinImg = loadImage("assets/smallCoin.png");
-//}
+function preload() {
+    sheetImg = loadImage("assets/cavesofgallet_tiles.png");
+    coinImg = loadImage("assets/smallCoin.png");
+}
 
 //const openBtn = document.getElementById("openModal");
 //const closeBtn = document.getElementById("closeModal");
@@ -151,7 +151,7 @@ function setup() {
 
     playerDeath();
     exitBlock();
-    loop();
+    //loop();
 }
 
 
@@ -165,7 +165,6 @@ function draw() {
     else if (gameState == "lose") {
 		loseScreen();
 	}
-    
 }
 
 function runGame() {
