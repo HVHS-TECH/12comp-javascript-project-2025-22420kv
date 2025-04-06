@@ -27,23 +27,38 @@ var score = 0;
 gameState = "play";
 
 let invalidUserName = "true";
-askUserName();
+userName();
 
-function askUserName() {
+function userName() {
     while (invalidUserName) {
-        askUserName = prompt("Welcome User! Please state your username before starting.")
-        if(askUserName == null) {
-            return(askUserName);
+        userName = prompt("Welcome User! Please state your username before starting.")
+        if(userName == null) {
+            return(userName);
         }
-        if(askUserName == null || !isNaN(askUserName) || askUserName == "") {
-            alert("Invalid input: No numbers allowed!");
+        if(userName == null || !isNaN(userName) || userName == "") {
+            alert("Thats not valid!");
         } else {
             invalidUserName = false;
         }
-        console.log(askUserName);
+        console.log(userName);
     }
 }
 
+if (userName == null) {                     //checks if user inputed a username
+    console.log("No username inputed");
+} 
+else {
+    console.log("Username inputed");
+}
+
+function test(_nameTrue) {
+    if (_nameTrue == userName) {
+        return "true"; 
+    }
+    else if (userName == null) {
+        return "false";
+    } 
+}
 
 
 function preload() {
@@ -151,7 +166,6 @@ function setup() {
 
     playerDeath();
     exitBlock();
-    //loop();
 }
 
 
@@ -239,6 +253,7 @@ function exitBlock() {
 //Called by draw()  
 /*******************************************************/
 function kbMovement() {
+   
     if (kb.pressing('a')) {
 		player.vel.x = -PLAYERSPEED;
     } else if (kb.pressing('d')) {
@@ -246,13 +261,10 @@ function kbMovement() {
     } else {
         player.vel.x = 0;
     }
-    if (kb.presses('w')) {  
-        //if (player.collides(grass)) {
-        //    player.vel.y = 0;
-        //}
+    player.collide(grass);
+    if (kb.presses('w')) {
         player.vel.y = -PLAYERJUMPHEIGHT;
-    } 
-
+    }
 }
 
 
