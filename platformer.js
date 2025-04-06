@@ -29,6 +29,12 @@ gameState = "play";
 let invalidUserName = "true";
 userName();
 
+
+
+/*******************************************************/
+// userName()
+// Asks user for username
+/*******************************************************/
 function userName() {
     while (invalidUserName) {
         userName = prompt("Welcome User! Please state your username before starting.")
@@ -61,6 +67,9 @@ function test(_nameTrue) {
 }
 
 
+/*******************************************************/
+// Preload()
+/*******************************************************/
 function preload() {
     sheetImg = loadImage("assets/cavesofgallet_tiles.png");
     coinImg = loadImage("assets/smallCoin.png");
@@ -94,12 +103,11 @@ function preload() {
 function setup() {
     new Canvas(400, 200, "pixelated x4"); 
     world.gravity.y = 10;
-    player = new Sprite(10, 10, 7, 'd'); 
+    player = new Sprite(15, 20, 7, 'd'); 
     player.color = 'lightpink';
     player.friction = 0;;
     player.drag = 0;
 
-    colors = new Sprite(200, 10, 7, 7, 's');
 
     grass = new Group();
     grass.image = (sheetImg);
@@ -123,6 +131,8 @@ function setup() {
 
     new Tiles(
         [
+            '',
+            '',
             's',
             's              s',
             'ggggggg        s',
@@ -162,7 +172,6 @@ function setup() {
 		coin.remove();
         score++;
 	});
-
 
     playerDeath();
     exitBlock();
@@ -214,9 +223,14 @@ function playerCollisions() {
 function loseScreen() {
     console.log("Player died");
     background("red");
-    text("You died!", 100, 100);
+    text("You died!", 150, 80);
+    text("Score: "+ score, 155, 100); 
+    textSize(15); 
     player.remove();
-    tiles.remove();
+    grass.remove();
+    stone.remove();
+    coin.remove();
+    killBlock.remove();
 }
 
 
@@ -241,12 +255,16 @@ function endScreen() {
 }
 
 function exitBlock() {
-    exitDoor = new Sprite(400, 169, 5, 15, 'k');
+    exitDoor = new Sprite(400, 185, 5, 15, 'k');
     exitDoor.color = "white";  
     if (player.collides(exitDoor)) {
         endScreen();
     }
 }
+
+
+
+
 
 /*******************************************************/
 // kbMovement()                                            //Note: Make sprite unable to double jump when its in the air///
@@ -261,7 +279,7 @@ function kbMovement() {
     } else {
         player.vel.x = 0;
     }
-    player.collide(grass);
+    //player.collide(grass);
     if (kb.presses('w')) {
         player.vel.y = -PLAYERJUMPHEIGHT;
     }
@@ -279,7 +297,8 @@ function kbMovement() {
 
 
 function displayScore() {
-    text("Score: "+ score, 350, 10)     ///figure out how to change the text color
+    text("Username: "+ userName, 1, 8) 
+    text("Score: "+ score, 350, 8)  
     textSize(10);
 }
 
