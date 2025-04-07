@@ -73,6 +73,7 @@ function test(_nameTrue) {
 function preload() {
     sheetImg = loadImage("assets/cavesofgallet_tiles.png");
     coinImg = loadImage("assets/smallCoin.png");
+    bigCoinImg = loadImage("assets/coin.png");
 }
 
 //const openBtn = document.getElementById("openModal");
@@ -129,6 +130,11 @@ function setup() {
     coin.collider = "static";
     coin.tile = 'c';
 
+    bigCoin = new Group();
+    bigCoin.image = (bigCoinImg);
+    bigCoin.collider = "static";
+    bigCoin.tile = 'b';
+
     new Tiles(
         [
             '',
@@ -139,7 +145,7 @@ function setup() {
             '         ggggggg',
             '    gggggg',
             'ggg',
-            '  gggggg           s',
+            '  gggggg           s        b',
             '        gggggg     s',
             '                  cs        g',       
             '               ggggg           g',
@@ -168,10 +174,16 @@ function setup() {
 // Help from p5.play tiles page 
 /*******************************************************/
     player.collides(coin, (player, coin) => {
-        console.log("Touches");
+        console.log("Coins");
 		coin.remove();
         score++;
 	});
+
+    player.collides(bigCoin, (player, bigCoin) => {
+        console.log("Big coins");
+        bigCoin.remove();
+        score = score + 2;
+    });
 
     playerDeath();
     exitBlock();
@@ -183,11 +195,30 @@ function setup() {
 /*******************************************************/
 function draw() {
     if (gameState == "play") {
-		runGame();
+		startScreen(); //runGame();
 	} 
     else if (gameState == "lose") {
 		loseScreen();
 	}
+    else if (gameState == "win") {
+        endScreen();
+    }
+    else if (gameState == "start") {
+        runGame(); //startScreen();
+    }
+}
+
+function startScreen() {
+    console.log("Game starting");
+    background("blue");
+    text("Hello there!", 150, 80);
+    player.remove();
+    grass.remove();
+    stone.remove();
+    coin.remove();
+    bigCoin.remove();
+    killBlock.remove();
+    exitBlock.remove();
 }
 
 function runGame() {
@@ -209,9 +240,10 @@ function playerCollisions() {
         gameState = "lose";
     }
     if(player.collide(exitDoor)) {
-        endScreen();
+        gameState = "win";
     }
 }
+
 
 
 
@@ -224,13 +256,16 @@ function loseScreen() {
     console.log("Player died");
     background("red");
     text("You died!", 150, 80);
-    text("Score: "+ score, 155, 100); 
+    text("Score: "+ score, 155, 100);
+    text("Reload page to try again", 110, 120);
     textSize(15); 
     player.remove();
     grass.remove();
     stone.remove();
     coin.remove();
+    bigCoin.remove();
     killBlock.remove();
+    exitBlock.remove();
 }
 
 
@@ -251,14 +286,23 @@ function playerDeath() {
 function endScreen() {
     console.log("Player won");
     background("purple");
-    text("You escaped!", 100, 100);
+    text("You escaped!", 150, 80);
+    text("Score: " + score, 155, 100);
+    text("Reload page to restart", 120, 120);
+    player.remove();
+    grass.remove();
+    stone.remove();
+    coin.remove();
+    bigCoin.remove();
+    exitBlock.remove();
+    killBlock.remove();
 }
 
 function exitBlock() {
     exitDoor = new Sprite(400, 185, 5, 15, 'k');
     exitDoor.color = "white";  
     if (player.collides(exitDoor)) {
-        endScreen();
+        gameState = "win"
     }
 }
 
