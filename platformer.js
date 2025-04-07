@@ -187,6 +187,7 @@ function setup() {
 
     playerDeath();
     exitBlock();
+
 }
 
 
@@ -218,7 +219,15 @@ function startScreen() {
     coin.remove();
     bigCoin.remove();
     killBlock.remove();
-    exitBlock.remove();
+    exitDoor.remove();
+}
+
+function startB() {
+    playButton = new Sprite(115, 210, 7, 's');
+    playButton.color = 'yellow';
+    if (startB.mouse.pressing) {
+        runGame();
+    }
 }
 
 function runGame() {
@@ -226,6 +235,7 @@ function runGame() {
     kbMovement();
     displayScore();
     playerCollisions();
+    
 
 }
 
