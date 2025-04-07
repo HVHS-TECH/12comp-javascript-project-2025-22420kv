@@ -1,60 +1,59 @@
-* {
-    box-sizing: border-box;
+html, body {
+    
+    height: 100%;
+    margin: 0;
+    background: linear-gradient(to bottom, #556B2F, #21263f);
 }
 
-body {
-    background: black;
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 80px;
+    padding: 15px;
+    color: pink;
+    text-shadow: 5px 5px #21263f;
+    font-family: "Poetsen One", sans-serif
+}
+
+h5 {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    margin: 30px;
+    color: #21263f;
+    font-family: "Poetsen One";
 }
 
 button {
-    background-image: linear-gradient(to right, #663388, #8853bd);
-    border-radius: 20px;
-    border: 0;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
-    color: white;
-    cursor: pointer;
-    padding: 10px 25px;
+    color: pink;
+    background-color: #21263f;
+    font-size: 100px;
+    padding: 8px 15px;
+    border-radius: 15px;
+    border: 10px solid #3d425b;
+    font-family: "Poetsen One", sans-serif
 }
 
-button:active {
-    opacity: 0.8;
-}
+button:hover {
+    background-color: pink;
+    transition-duration: 1s;
+  }
 
-.modal {
-    background-color: rgba(0,0,0,0.3);
-    opacity: 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    transition: all 0.3s ease-in-out;
-    z-index: -1;
-
+.startButton {
     display: flex;
-    align-items: center;
     justify-content: center;
-}
- 
-.model.open {
-    opacity: 1;
-    z-index: 999;
+    align-items: center;
+    font-size: 50px;
+    height: 100%;
 }
 
-.modal-inner {
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
-    padding: 15px 25px;
-    text-align: center;
-    width: 380px;
-}
-
-.modal-inner h2 {
-    margin: 0;
-}
-
-.modal-innder p {
-    line-height: 24px;
-    margin: 10px;
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    margin: 50px;
 }

@@ -24,7 +24,7 @@ const PLAYERJUMPHEIGHT = 1.5;
 
 var score = 0;
 
-gameState = "play";
+gameState = "start";
 
 let invalidUserName = "true";
 userName();
@@ -74,20 +74,8 @@ function preload() {
     sheetImg = loadImage("assets/cavesofgallet_tiles.png");
     coinImg = loadImage("assets/smallCoin.png");
     bigCoinImg = loadImage("assets/coin.png");
+
 }
-
-//const openBtn = document.getElementById("openModal");
-//const closeBtn = document.getElementById("closeModal");
-//const modal = document.getElementById("modal");
-
-//openBtn.addEventListener("click", () => {
-//    modal.classList.add("open");
-//});
-
-//closeBtn.addEventListener("click", () => {
-//    modal.classList.remove("open");
-//})
-
 
 
 //const spriteColors = ["lightblue", "lightgreen", "lightgrey"];
@@ -108,7 +96,6 @@ function setup() {
     player.color = 'lightpink';
     player.friction = 0;;
     player.drag = 0;
-
 
     grass = new Group();
     grass.image = (sheetImg);
@@ -187,6 +174,7 @@ function setup() {
 
     playerDeath();
     exitBlock();
+    //startB();
 
 }
 
@@ -195,8 +183,8 @@ function setup() {
 // draw()
 /*******************************************************/
 function draw() {
-    if (gameState == "play") {
-		startScreen(); //runGame();
+    if (gameState == "start") {  
+		runGame();  //startScreen(); 
 	} 
     else if (gameState == "lose") {
 		loseScreen();
@@ -204,39 +192,44 @@ function draw() {
     else if (gameState == "win") {
         endScreen();
     }
-    else if (gameState == "start") {
-        runGame(); //startScreen();
-    }
+    //else if (gameState == "start") {
+    //    runGame(); //startScreen();
+    //}
 }
 
-function startScreen() {
-    console.log("Game starting");
-    background("blue");
-    text("Hello there!", 150, 80);
-    player.remove();
-    grass.remove();
-    stone.remove();
-    coin.remove();
-    bigCoin.remove();
-    killBlock.remove();
-    exitDoor.remove();
-}
+//function startScreen() {
+    //console.log("Game starting");
+    //background("blue");
+    //text("Hello there!", 150, 80);
+    //player.remove();
+    //grass.remove();
+    //stone.remove();
+    //coin.remove();
+    //bigCoin.remove();
+    //killBlock.remove();
+    //exitDoor.remove();
 
-function startB() {
-    playButton = new Sprite(115, 210, 7, 's');
-    playButton.color = 'yellow';
-    if (startB.mouse.pressing) {
-        runGame();
-    }
-}
+    //playButton = new Sprite(150, 80, 7, 7, 's');
+    //playButton.color = 'yellow';
+    //if (mouse.pressing()) {
+    //    gameState = "start"
+        
+    //}
+//}
+
+//function startB() {
+//    playButton = new Sprite(115, 210, 7, 's');
+//    playButton.color = 'yellow';
+//    if (player.collides(playButton)) {
+//        runGame();
+//    }
+//}
 
 function runGame() {
     background("#21263f");    //#21263f background color to match tiles
     kbMovement();
     displayScore();
     playerCollisions();
-    
-
 }
 
 
@@ -281,7 +274,7 @@ function loseScreen() {
 
 function playerDeath() {
     killBlock = new Sprite(200, 200, 400, 10, 'k');
-    killBlock.color = 'red';
+    killBlock.color = 'rgb(139, 0, 0)';
     if (player.collides(killBlock)) {
         gameState = "lose"
         
