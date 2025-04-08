@@ -268,7 +268,7 @@ function loseScreen() {
     coin.remove();
     bigCoin.remove();
     killBlock.remove();
-    exitBlock.remove();
+    exitDoor.remove();
 }
 
 
@@ -292,12 +292,13 @@ function endScreen() {
     text("You escaped!", 150, 80);
     text("Score: " + score, 155, 100);
     text("Reload page to restart", 120, 120);
+    textSize(15);
     player.remove();
     grass.remove();
     stone.remove();
     coin.remove();
     bigCoin.remove();
-    exitBlock.remove();
+    exitDoor.remove();
     killBlock.remove();
 }
 
