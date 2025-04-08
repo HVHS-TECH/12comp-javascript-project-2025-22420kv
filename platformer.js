@@ -97,6 +97,7 @@ function setup() {
     player.friction = 0;;
     player.drag = 0;
 
+   // Floor and wall tiles
     grass = new Group();
     grass.image = (sheetImg);
     grass.collider = "static";
@@ -111,7 +112,7 @@ function setup() {
     stone.addAni({ w:8, h:8, row:0, col:3 });
     stone.tile = 's';
 
-
+    //Collectable tiles
     coin = new Group();
     coin.image = (coinImg);
     coin.collider = "static";
@@ -128,7 +129,7 @@ function setup() {
             '',
             's',
             's              s',
-            'ggggggg        s',
+            'ggggggg        s', 
             '         ggggggg',
             '    gggggg',
             'ggg',
@@ -192,44 +193,16 @@ function draw() {
     else if (gameState == "win") {
         endScreen();
     }
-    //else if (gameState == "start") {
-    //    runGame(); //startScreen();
-    //}
 }
-
-//function startScreen() {
-    //console.log("Game starting");
-    //background("blue");
-    //text("Hello there!", 150, 80);
-    //player.remove();
-    //grass.remove();
-    //stone.remove();
-    //coin.remove();
-    //bigCoin.remove();
-    //killBlock.remove();
-    //exitDoor.remove();
-
-    //playButton = new Sprite(150, 80, 7, 7, 's');
-    //playButton.color = 'yellow';
-    //if (mouse.pressing()) {
-    //    gameState = "start"
-        
-    //}
-//}
-
-//function startB() {
-//    playButton = new Sprite(115, 210, 7, 's');
-//    playButton.color = 'yellow';
-//    if (player.collides(playButton)) {
-//        runGame();
-//    }
-//}
 
 function runGame() {
     background("#21263f");    //#21263f background color to match tiles
     kbMovement();
     displayScore();
     playerCollisions();
+
+    //camera.x = player.x
+	//camera.y = player.y
 }
 
 
@@ -257,9 +230,9 @@ function playerCollisions() {
 /*******************************************************/
 function loseScreen() {
     console.log("Player died");
-    background("red");
+    background("darkRed");
     text("You died!", 150, 80);
-    text("Score: "+ score, 155, 100);
+    text("Score: " + score, 155, 100);
     text("Reload page to try again", 110, 120);
     textSize(15); 
     player.remove();
@@ -288,7 +261,7 @@ function playerDeath() {
 /*******************************************************/
 function endScreen() {
     console.log("Player won");
-    background("purple");
+    background("black");
     text("You escaped!", 150, 80);
     text("Score: " + score, 155, 100);
     text("Reload page to restart", 120, 120);
@@ -327,27 +300,19 @@ function kbMovement() {
     } else {
         player.vel.x = 0;
     }
-    //player.collide(grass);
-    if (kb.presses('w')) {
-        player.vel.y = -PLAYERJUMPHEIGHT;
-    }
+    
+    if (kb.presses('w')) { //So player only jumps when touching the tiles         && player.colliding(grass) || kb.presses('w') && player.colliding(stone)
+        player.vel.y = -(PLAYERJUMPHEIGHT);
+     
+    } 
 }
-
-
-
-//function isPlayerJumping() {
-//    console.log("Player left");
-//    player.collides(wallBottom, stopJumping);
-//    function stopJumping(collider1, collider2) {
-//		player.vel.y = 0;
-//	}
-//}
 
 
 function displayScore() {
     text("Username: "+ userName, 1, 8) 
     text("Score: "+ score, 350, 8)  
     textSize(10);
+    fill('#8FBC8B');
 }
 
 
