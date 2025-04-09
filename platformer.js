@@ -77,15 +77,6 @@ function preload() {
 
 }
 
-
-//const spriteColors = ["lightblue", "lightgreen", "lightgrey"];
-
-//console.log(spriteColors);
-//const list = [1, 2, 3, 4];
-//for (var i = 0; i <= 2; i++) {
-//    console.log[i];
-//}
-
 /*******************************************************/
 // setup()
 /*******************************************************/
@@ -127,24 +118,24 @@ function setup() {
         [
             '',
             '',
-            's',
-            's              s',
-            'ggggggg        s', 
-            '         ggggggg',
-            '    gggggg',
-            'ggg',
-            '  gggggg           s        b',
-            '        gggggg     s',
-            '                  cs        g',       
-            '               ggggg           g',
-            '          gggggg                  g',
-            '     ggggg                           g',
+            's                                c',
+            's              s                gggggggggggggg',
+            'ggggggg        s                                gg', 
+            's        ggggggg                              gg',
+            's   gggggg                                ggg',
+            'ggg                      b                   gg',
+            '  gggggg           s                            gg',
+            '        gggggg     s     g                   ggg',
+            '                  cs        g             gg',       
+            '               ggggg           g            ggg',
+            '          gggggg                  g             gg',
+            '     ggggg                           g       ggg',
             ' ggg                                    gggg',
             '   ggg                                g',
             '      g                          gggg',
             '         g                     g',
-            '             c            gggg',
-            '         g          gggg',
+            '             c           ggggg',
+            '         gg         gggg',
             '       g     g    g',
             '     g           g',
             'c  g',
@@ -175,8 +166,6 @@ function setup() {
 
     playerDeath();
     exitBlock();
-    //startB();
-
 }
 
 
@@ -201,8 +190,8 @@ function runGame() {
     displayScore();
     playerCollisions();
 
-    //camera.x = player.x
-	//camera.y = player.y
+    camera.x = player.x
+	camera.y = player.y
 }
 
 
