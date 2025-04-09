@@ -5,11 +5,9 @@
 
 /*******************************************************/
 // IMPORTANT NOTES!!
-// Create for-loop for when you die the game shows how many coins you've collected
-// Create different types of coins so loop can show different items//
-// Create popup
-// Color picking for loop with array
-// Make it so endScreen shows 
+// Tiles pack - Caves of Gallet - made by KaizarNike on Itch.io
+// Some help from p5.play website and w3Schools
+// I have commented which code I got where below for more detail
 /*******************************************************/
 
 /*******************************************************/
@@ -103,6 +101,14 @@ function setup() {
     stone.addAni({ w:8, h:8, row:0, col:3 });
     stone.tile = 's';
 
+    // Lava
+    lava = new Group();
+    lava.image = (sheetImg);
+    lava.collider = "static";
+    lava.spriteSheet = sheetImg;
+    lava.addAni({ w:8, h:8, row:10, col:4 });
+    lava.tile = 'l';
+
     //Collectable tiles
     coin = new Group();
     coin.image = (coinImg);
@@ -116,24 +122,24 @@ function setup() {
 
     new Tiles(
         [
-            '',
-            '',
-            's                                c',
-            's              s                gggggggggggggg',
-            'ggggggg        s                                gg', 
-            's        ggggggg                              gg',
-            's   gggggg                                ggg',
-            'ggg                      b                   gg',
-            '  gggggg           s                            gg',
-            '        gggggg     s     g                   ggg',
-            '                  cs        g             gg',       
-            '               ggggg           g            ggg',
-            '          gggggg                  g             gg',
-            '     ggggg                           g       ggg',
+            '                                s',
+            '                                ss      s',
+            's              s                ssc    sss       s',
+            's              s                gggggggggggggg   s',
+            'ggggggg       ss                                gg', 
+            's        ggggggg                              gg s',
+            's   gggggg                                ggg    s',
+            'ggg          s           b                   gg  s',
+            ' sgggggg    ss     s                            gg',
+            ' s      gggggg     s     g                   ggg s',
+            ' s                cs        g             gg     s',       
+            ' s         s   ggggg           g            ggg  s',
+            ' s        gggggg                  g             gg',
+            ' s   ggggg                           g       ggg',
             ' ggg                                    gggg',
             '   ggg                                g',
             '      g                          gggg',
-            '         g                     g',
+            '         g                 s   g',
             '             c           ggggg',
             '         gg         gggg',
             '       g     g    g',
@@ -174,7 +180,7 @@ function setup() {
 /*******************************************************/
 function draw() {
     if (gameState == "start") {  
-		runGame();  //startScreen(); 
+		runGame();
 	} 
     else if (gameState == "lose") {
 		loseScreen();
@@ -189,9 +195,6 @@ function runGame() {
     kbMovement();
     displayScore();
     playerCollisions();
-
-    camera.x = player.x
-	camera.y = player.y
 }
 
 
@@ -237,6 +240,7 @@ function loseScreen() {
 function playerDeath() {
     killBlock = new Sprite(200, 200, 400, 10, 'k');
     killBlock.color = 'rgb(139, 0, 0)';
+    stroke = 'red';
     if (player.collides(killBlock)) {
         gameState = "lose"
         
@@ -290,7 +294,7 @@ function kbMovement() {
         player.vel.x = 0;
     }
     
-    if (kb.presses('w')) { //So player only jumps when touching the tiles         && player.colliding(grass) || kb.presses('w') && player.colliding(stone)
+    if (kb.presses('w') && player.colliding(grass) || kb.presses('w') && player.colliding(stone)) { //So player only jumps when touching the tiles         && player.colliding(grass) || kb.presses('w') && player.colliding(stone)
         player.vel.y = -(PLAYERJUMPHEIGHT);
      
     } 
