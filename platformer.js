@@ -24,6 +24,7 @@ const PLAYERJUMPHEIGHT = 1.5;
 
 // Score
 var score = 0;
+var Point = "User got a point!";
 
 // Screen changes
 gameState = "start";
@@ -171,13 +172,13 @@ function setup() {
  // Help from p5.play tiles page
  /*******************************************************/
     player.collides(coin, (player, coin) => {
-        console.log("Coins");
+        console.log(Point);
 		coin.remove();
         score++;
 	});
 
     player.collides(bigCoin, (player, bigCoin) => {
-        console.log("Big coins");
+        console.log(Point);
         bigCoin.remove();
         score = score + 2;
     });
@@ -309,7 +310,7 @@ function kbMovement() {
         player.vel.x = 0;
     }
                                //So player only jumps when touching the tiles 
-    if (kb.presses('w') && player.colliding(grass) || kb.presses('w') && player.colliding(stone)) {   
+    if (kb.presses('w') && player.colliding(grass) || kb.presses('w') && player.colliding(stone)) { 
         player.vel.y = -(PLAYERJUMPHEIGHT);
      
     } 
