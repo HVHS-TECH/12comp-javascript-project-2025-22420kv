@@ -118,8 +118,37 @@ function setup() {
     lava.image = (sheetImg);
     lava.collider = "static";
     lava.spriteSheet = sheetImg;
-    lava.addAni({ w:8, h:8, row:10, col:4 });
+    lava.addAni({ w:8, h:8, row:8, col:4 });
     lava.tile = 'l';
+
+    lava2 = new Group();
+    lava2.image = (sheetImg);
+    lava2.collider = "static";
+    lava2.spriteSheet = sheetImg;
+    lava2.addAni({ w:8, h:8, row:10, col:4 });
+    lava2.tile = 'k';
+
+    lava3 = new Group();
+    lava3.image = (sheetImg);
+    lava3.collider = "static";
+    lava3.spriteSheet = sheetImg;
+    lava3.addAni({ w:8, h:8, row:9, col:4 });
+    lava3.tile = 'j';
+
+    lava4 = new Group();
+    lava4.image = (sheetImg);
+    lava4.collider = "static";
+    lava4.spriteSheet = sheetImg;
+    lava4.addAni({ w:8, h:8, row:7, col:4 });
+    lava4.tile = 'h';
+
+    // Decoration
+    rock = new Group();
+    rock.image = (sheetImg);
+    rock.collider = "static";
+    rock.spriteSheet = sheetImg;
+    rock.addAni({ w:8, h:8, row:0, col:4 });
+    rock.tile = 'r';
 
     //Collectable tiles
     coin = new Group();
@@ -150,16 +179,16 @@ function setup() {
             ' s        gggggg                  g             gg',
             ' s   ggggg                           g       ggg',
             ' ggg                                    gggg',
-            '   ggg                                g',
-            '      g                          gggg',
-            '         g                 s   g',
-            '             c           ggggg',
-            '         gg         gggg',
-            '       g     g    g',
-            '     g           g',
-            'c  g',
-            'gg',
-            '                                              g  g'
+            '   ggg                                g  h',
+            '      g                          gggg    l',
+            '         g                 s   g         l',
+            '             c           ggggg           l',
+            '         gg         gggg   h             l',
+            '       g     g    g        l             l',
+            '     g h         g         l             l',
+            'c  g   l                   l             l',
+            'gg     j                   j             j',
+            'llllllkkklllllllllllllllllkkklllllllllllkkklllskss'
         ],
         5, 5, //x, y
         8, 8   //w, h
@@ -183,7 +212,7 @@ function setup() {
         score = score + 2;
     });
 
-    playerDeath();
+    //playerDeath(); // This isnt usefull anymore but keeping it in for incase 
     exitBlock();
 }
 
@@ -219,7 +248,7 @@ function runGame() {
 // When the user does something major like die or win
 /*******************************************************/
 function playerCollisions() {
-    if (player.collide(killBlock)) {
+    if (player.collide(lava)) {
         gameState = "lose";
     }
     if(player.collide(exitDoor)) {
@@ -247,20 +276,19 @@ function loseScreen() {
     stone.remove();
     coin.remove();
     bigCoin.remove();
-    killBlock.remove();
     exitDoor.remove();
 }
-
-// killBlock setup
-function playerDeath() {
-    killBlock = new Sprite(200, 200, 400, 10, 'k');
-    killBlock.color = 'rgb(139, 0, 0)';
-    stroke = 'red';
-    if (player.collides(killBlock)) {
-        gameState = "lose"
-        
-    }
-}
+  
+// killBlock setup  
+//function playerDeath() {                                     // This isnt usefull anymore but keeping it in for incase 
+//    killBlock = new Sprite(200, 200, 400, 10, 'k'); 
+//    killBlock.color = 'rgb(139, 0, 0)';
+//    stroke = 'red';
+//    if (player.collides(killBlock)) {
+//        gameState = "lose"
+//        
+//    }
+//}
 
 /*******************************************************/
 // endScreen()                                          
@@ -280,7 +308,6 @@ function endScreen() {
     coin.remove();
     bigCoin.remove();
     exitDoor.remove();
-    killBlock.remove();
 }
 
 // exitDoor setup
