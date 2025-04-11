@@ -79,6 +79,7 @@ function test(_nameTrue) {
 /*******************************************************/
 function preload() {
     sheetImg = loadImage("assets/cavesofgallet_tiles.png");
+    flippedSheetImg = loadImage("assets/cavesofgallet_tilesFlipped.png");
     coinImg = loadImage("assets/smallCoin.png");
     bigCoinImg = loadImage("assets/coin.png");
 
@@ -113,6 +114,27 @@ function setup() {
     stone.addAni({ w:8, h:8, row:0, col:3 });
     stone.tile = 's';
 
+    stone2 = new Group();
+    stone2.image = (sheetImg);
+    stone2.collider = "none";
+    stone2.spriteSheet = flippedSheetImg;
+    stone2.addAni({ w:8, h:8, row:0, col:3 });
+    stone2.tile = 'd';
+    
+    stone3 = new Group();
+    stone3.image = (sheetImg);
+    stone3.collider = "none";
+    stone3.spriteSheet = flippedSheetImg;
+    stone3.addAni({ w:8, h:8, row:0, col:5 });
+    stone3.tile = 'w';
+
+    stone4 = new Group();
+    stone4.image = (sheetImg);
+    stone4.collider = "none";
+    stone4.spriteSheet = flippedSheetImg;
+    stone4.addAni({ w:8, h:8, row:0, col:4 });
+    stone4.tile = 'a';
+
     // Lava
     lava = new Group();
     lava.image = (sheetImg);
@@ -130,25 +152,82 @@ function setup() {
 
     lava3 = new Group();
     lava3.image = (sheetImg);
-    lava3.collider = "static";
+    lava3.collider = "none";
     lava3.spriteSheet = sheetImg;
     lava3.addAni({ w:8, h:8, row:9, col:4 });
     lava3.tile = 'j';
 
     lava4 = new Group();
     lava4.image = (sheetImg);
-    lava4.collider = "static";
+    lava4.collider = "none";
     lava4.spriteSheet = sheetImg;
     lava4.addAni({ w:8, h:8, row:7, col:4 });
     lava4.tile = 'h';
 
-    // Decoration
-    rock = new Group();
-    rock.image = (sheetImg);
-    rock.collider = "static";
-    rock.spriteSheet = sheetImg;
-    rock.addAni({ w:8, h:8, row:0, col:4 });
-    rock.tile = 'r';
+    lava5 = new Group();
+    lava5.image = (sheetImg);
+    lava5.collider = "none";
+    lava5.spriteSheet = sheetImg;
+    lava5.addAni({ w:8, h:8, row:8, col:3 });
+    lava5.tile = 'r';
+
+    lava6 = new Group();
+    lava6.image = (sheetImg);
+    lava6.collider = "none";
+    lava6.spriteSheet = flippedSheetImg;
+    lava6.addAni({ w:8, h:8, row:8, col:4 });
+    lava6.tile = 'e';
+
+    // Moss
+    moss = new Group();
+    moss.image = (sheetImg);
+    moss.collider = "none";
+    moss.spriteSheet = sheetImg;
+    moss.addAni({ w:8, h:8, row:3, col:0 });
+    moss.tile = 'm';
+
+    moss2 = new Group();
+    moss2.image = (sheetImg);
+    moss2.collider = "none";
+    moss2.spriteSheet = sheetImg;
+    moss2.addAni({ w:8, h:8, row:2, col:2 });
+    moss2.tile = 'n';
+
+    moss3 = new Group();
+    moss3.image = (sheetImg);
+    moss3.collider = "none";
+    moss3.spriteSheet = sheetImg;
+    moss3.addAni({ w:8, h:8, row:3, col:2 });
+    moss3.tile = 'v';
+
+    moss4 = new Group();
+    moss4.image = (sheetImg);
+    moss4.collider = "none";
+    moss4.spriteSheet = flippedSheetImg;
+    moss4.addAni({ w:8, h:8, row:3, col:7 });
+    moss4.tile = 'i';
+
+    moss5 = new Group();
+    moss5.image = (sheetImg);
+    moss5.collider = "none";
+    moss5.spriteSheet = flippedSheetImg;
+    moss5.addAni({ w:8, h:8, row:2, col:5 });
+    moss5.tile = 'u';
+
+    // Vines
+    vine = new Group();
+    vine.image = (sheetImg);
+    vine.collider = "none";
+    vine.spriteSheet = sheetImg;
+    vine.addAni({ w:8, h:8, row:10, col:5 });
+    vine.tile = 'y';
+
+    vine2 = new Group();
+    vine2.image = (sheetImg);
+    vine2.collider = "none";
+    vine2.spriteSheet = flippedSheetImg;
+    vine2.addAni({ w:8, h:8, row:10, col:2 });
+    vine2.tile = 't';
 
     //Collectable tiles
     coin = new Group();
@@ -164,31 +243,31 @@ function setup() {
     // Game screen layout
     new Tiles(
         [
-            '                                s',
-            '                                ss      s',
-            's              s                ssc    sss       s',
-            's              s                gggggggggggggg   s',
-            'ggggggg       ss                                gg', 
-            's        ggggggg                              gg s',
-            's   gggggg                                ggg    s',
-            'ggg          s           b                   gg  s',
-            ' sgggggg    ss     s                            gg',
-            ' s      gggggg     s     g                   ggg s',
-            ' s                cs        g             gg     s',       
-            ' s         s   ggggg           g            ggg  s',
-            ' s        gggggg                  g             gg',
-            ' s   ggggg                           g       ggg',
-            ' ggg                                    gggg',
-            '   ggg                                g  h',
-            '      g                          gggg    l',
-            '         g                 s   g         l',
-            '             c           ggggg           l',
-            '         gg         gggg   h             l',
-            '       g     g    g        l             l',
-            '     g h         g         l             l',
-            'c  g   l                   l             l',
-            'gg     j                   j             j',
-            'llllllkkklllllllllllllllllkkklllllllllllkkklllskss'
+            '                               usn      v',
+            'v              v               ussn    usv       v',
+            'sn            ust              ussmcv isssnv    us',
+            'sm  v         isn              yggggggggggggggn is',
+            'ggggggg   vv issn              u              v gg', 
+            'sn  v   ugggggggn              u          v   ggus',
+            'sm  gggggg   v                           ugggm   s',
+            'gggn   v    ysn    v     b               u   ggnvs',
+            ' sggggggn   ssn   ust                        v  gg',
+            ' sn     ggggggn   usn   ugn v               ugggus',
+            'ysn        v   v cisn       g  v         yggnv  us',       
+            'ust       usm  gggggn          gn           ggg is',
+            'usn  vv  uggggggn               nug             gg',
+            'usm  ggggg                           gn  vv  gggn',
+            'ugggnv                                vugggg    n',
+            'u  gggn                           vv  g ehr',
+            '      gn v                 v    ugggg   elr',
+            '       n g                usn ug        elr',
+            '             c      vv  ugggggn         elr',
+            '         ggn       uggggu ehr           elr',
+            '     v g    ug   vgn      elr           elr      d',
+            '     gehr        g        elr           elr     ws',
+            'c ug  elr                 elr           elr    daa',
+            'gg    ejr                 ejr           ejr    daa',
+            'llllllkkklllllllllllllllllkkklllllllllllkkklllssss'
         ],
         5, 5, //x, y
         8, 8   //w, h
@@ -231,6 +310,25 @@ function draw() {
     else if (gameState == "win") {
         endScreen();
     }
+
+    // Putting the sprite infront of certain tiles (Help from google ai)
+    moss.draw();
+    moss2.draw();
+    moss3.draw();
+    moss4.draw();
+    moss5.draw();
+    vine.draw();
+    vine2.draw();
+    lava.draw();
+    lava2.draw();
+    lava3.draw();
+    lava4.draw();
+    lava5.draw();
+    lava6.draw();
+    stone2.draw();
+    stone3.draw();
+    stone4.draw();
+    player.draw();
 }
 
 // Game screen major code
@@ -248,7 +346,7 @@ function runGame() {
 // When the user does something major like die or win
 /*******************************************************/
 function playerCollisions() {
-    if (player.collide(lava)) {
+    if (player.collide(lava || lava2)) {
         gameState = "lose";
     }
     if(player.collide(exitDoor)) {
@@ -277,6 +375,22 @@ function loseScreen() {
     coin.remove();
     bigCoin.remove();
     exitDoor.remove();
+    moss.remove();
+    moss2.remove();
+    moss3.remove();
+    moss4.remove();
+    moss5.remove();
+    vine.remove();
+    vine2.remove();
+    lava.remove();
+    lava2.remove();
+    lava3.remove();
+    lava4.remove();
+    lava5.remove();
+    lava6.remove();
+    stone2.remove();
+    stone3.remove();
+    stone4.remove();
 }
   
 // killBlock setup  
@@ -308,6 +422,22 @@ function endScreen() {
     coin.remove();
     bigCoin.remove();
     exitDoor.remove();
+    moss.remove();
+    moss2.remove();
+    moss3.remove();
+    moss4.remove();
+    moss5.remove();
+    vine.remove();
+    vine2.remove();
+    lava.remove();
+    lava2.remove();
+    lava3.remove();
+    lava4.remove();
+    lava5.remove();
+    lava6.remove();
+    stone2.remove();
+    stone3.remove();
+    stone4.remove();
 }
 
 // exitDoor setup
